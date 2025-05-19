@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import connectDB from "./database/db.js";
 import categoriesRoutes from "./routes/categories.routes.js";
+import itemsRoutes from "./routes/items.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.use(
 
 //Api's
 app.use("/api/v1/categories", categoriesRoutes);
+app.use("/api/v1/items", itemsRoutes);
 app.use("/api/v1/admin", adminRoutes);
 
 const PORT = process.env.PORT || 3000;

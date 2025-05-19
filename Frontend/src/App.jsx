@@ -4,7 +4,6 @@ import HomePage from './components/user/HomePage'
 import MenuCategories from './components/user/MenuCategories';
 import MenuItems from './components/user/MenuItems';
 import Login from './components/admin/Login';
-import AllCategories from './components/admin/Dashboard/AllCategories';
 import ProtectedRoute from './components/admin/ProtectedRoute';
 import AdminDashboard from './components/admin/Dashboard/AdminDashboard';
 

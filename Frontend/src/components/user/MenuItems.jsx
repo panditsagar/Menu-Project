@@ -1,6 +1,6 @@
 
 import React from "react";
-import { useLocation } from 'react-router-dom';
+
 const menuItems = [
     {
         id: 1,
@@ -23,7 +23,7 @@ const menuItems = [
         title: "Super Food Salad",
         description: "assorted mesclun greens, roasted pumpkin seeds, watermelon, amaranth puff.",
         price: 525,
-        labels: ["VE", "GF"],
+        labels: ["VEG"],
         imageUrl: "https://airmenusimages.blr1.cdn.digitaloceanspaces.com/item/item_543992_1726580344905_DSC00025.jpg",
     },
     {
@@ -31,7 +31,7 @@ const menuItems = [
         title: "Classic Chicken Burger",
         description: "crispy chicken patty with mayo and lettuce in a toasted bun.",
         price: 199,
-        labels: ["DF"],
+        labels: ["NONVEG"],
         imageUrl: "https://airmenusimages.blr1.cdn.digitaloceanspaces.com/item/item_543994_1726580442376_DSC00153.jpg",
     },
     {
@@ -85,13 +85,12 @@ const menuItems = [
 ];
 
 const MenuItems = () => {
-    const location = useLocation();
-    const category = location.state?.category;
+
     const Loading = false
     return (
         <>
             <div className="p-4 pb-2">
-                <h1 className="text-black text-3xl font-semibold px-1">{category.name}</h1>
+                <h1 className="text-black text-3xl font-semibold px-1">Panner</h1>
                 <hr className="text-gray-300" />
             </div>
             <div className="p-4 w-full mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
