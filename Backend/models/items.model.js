@@ -31,7 +31,6 @@ const itemSchema = new mongoose.Schema(
 
     isAvailable: {
       type: Boolean,
-      default: true,
     },
     type: {
       type: String,

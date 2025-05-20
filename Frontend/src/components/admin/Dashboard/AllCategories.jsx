@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import ClearIcon from '@mui/icons-material/Clear';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategory } from '../../../redux/CategorySlice';
+import { Link } from "react-router-dom";
 
 const AllCategories = () => {
   const [name, setName] = useState("");
@@ -12,6 +14,7 @@ const AllCategories = () => {
   const [imagePreview, setImagePreview] = useState(null);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { category } = useSelector((state) => state.categories);
 
@@ -88,7 +91,7 @@ const AllCategories = () => {
 
         {/* Form Section */}
         <div className="bg-white px-6 pb-6 md:px-6 md:pb-6 shadow-md">
-          <h1 className="text-xl pt-4 md:pb-1  text-gray-900">Add Menu Categories</h1>
+          <h1 className="text-xl pt-4 md:pb-1 font-semibold text-gray-900">Add Menu Categories</h1>
 
           <form className="flex flex-col gap-6 " onSubmit={handleSubmit}>
             <div>
@@ -162,7 +165,8 @@ const AllCategories = () => {
                 </tr>
               ) : (
                 category?.map((cat, index) => (
-                  <tr key={cat?.id} className="hover:bg-gray-50 transition border-b last:border-0 cursor-pointer">
+
+                  <tr key={cat?.id} onClick={()=> navigate("/admin/allitem")} className="hover:bg-gray-50 transition border-b last:border-0 cursor-pointer">
                     <td className="py-3 px-4">{index + 1}</td>
                     <td className="py-3 px-4 font-medium text-gray-700">{cat?.name}</td>
                     <td className="py-3 px-4">
@@ -176,6 +180,7 @@ const AllCategories = () => {
                       <ClearIcon />
                     </td>
                   </tr>
+
                 ))
               )}
             </tbody>

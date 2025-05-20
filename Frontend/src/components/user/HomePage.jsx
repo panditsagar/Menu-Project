@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
     const navigate = useNavigate();
+
+    
     return (
         <div className="min-h-screen w-full bg-cover bg-center flex flex-col items-center gap-6 p-4 bg-[url('/Home_Image.jpg')]">
             {/* Logo */}

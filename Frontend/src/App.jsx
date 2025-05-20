@@ -6,16 +6,21 @@ import MenuItems from './components/user/MenuItems';
 import Login from './components/admin/Login';
 import ProtectedRoute from './components/admin/ProtectedRoute';
 import AdminDashboard from './components/admin/Dashboard/AdminDashboard';
+import AddItems from './components/admin/Dashboard/AddItems';
+import AllItems from './components/admin/Dashboard/AllItems';
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={< HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/menu/categories" element={<MenuCategories />} />
         <Route path="/menu/items" element={<MenuItems />} />
         <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+        <Route path="/admin/additem" element={<ProtectedRoute><AddItems /></ProtectedRoute>} />
+        <Route path="/admin/allitem" element={<ProtectedRoute><AllItems /></ProtectedRoute>} />
+
       </Routes>
     </Router>
   )
