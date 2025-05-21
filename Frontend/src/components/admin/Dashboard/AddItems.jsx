@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 export default function AddItem() {
     const { categoryId } = useParams();
-
+    const navigate = useNavigate();
     const [data, setData] = useState({
         name: "",
         description: "",
@@ -44,8 +44,8 @@ export default function AddItem() {
         formData.append("price", data.price);
         formData.append("type", data.type);
         formData.append("isAvailable", data.isAvailable);
-        formData.append("file", imageUrl); 
-        formData.append("categoryId", categoryId); 
+        formData.append("file", imageUrl);
+        formData.append("categoryId", categoryId);
         try {
 
             const res = await axios.post(
@@ -58,7 +58,7 @@ export default function AddItem() {
             );
             if (res.data.success) {
                 alert("Item added successfully!");
-
+                navigate(`/admin/allitem/${categoryId}`);
                 setData({
                     name: "",
                     description: "",

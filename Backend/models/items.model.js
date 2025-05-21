@@ -31,10 +31,11 @@ const itemSchema = new mongoose.Schema(
 
     isAvailable: {
       type: Boolean,
+      default: false,
     },
     type: {
       type: String,
-      enum: ["veg", "nonveg"],
+      default: "",
     },
   },
   {

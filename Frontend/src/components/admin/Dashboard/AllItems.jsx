@@ -3,20 +3,25 @@ import ClearIcon from '@mui/icons-material/Clear';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import { Link, useParams } from 'react-router-dom';
-import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { getItem } from '../../../redux/ItemSlice.js';
 
 const AllItems = () => {
     const { categoryId } = useParams();
-    const [items, setItems] = useState([]);
+
+    const { item } = useSelector((state) => state.items);
+    const dispatch = useDispatch();
 
     const fetchItems = async () => {
         try {
             const res = await axios.get(
                 `http://localhost:5000/api/v1/items/get/${categoryId}`, { withCredentials: true }
             );
-            setItems(res.data.items); // Assuming your API returns items in `items` key
+            if (res.data.success) {
+                dispatch(getItem(res.data.items));
+            }
         } catch (err) {
             console.error("Error fetching items:", err);
         }
@@ -24,7 +29,7 @@ const AllItems = () => {
 
     useEffect(() => {
         fetchItems();
-    }, [categoryId]);
+    }, [dispatch, categoryId]);
 
 
     return (
@@ -56,14 +61,14 @@ const AllItems = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {items?.length === 0 ? (
+                            {item?.length === 0 ? (
                                 <tr>
                                     <td colSpan="7" className="text-center py-4 text-gray-500">
                                         No Items available.
                                     </td>
                                 </tr>
                             ) : (
-                                items?.map((item, index) => (
+                                item?.map((item, index) => (
                                     <tr key={index} className="hover:bg-gray-50 transition border-b last:border-0 cursor-pointer">
                                         <td className="py-3 px-4 font-medium text-gray-700 whitespace-nowrap">{item?.name}</td>
                                         <td

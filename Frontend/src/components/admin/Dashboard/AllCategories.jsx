@@ -35,7 +35,9 @@ const AllCategories = () => {
 
     try {
       const res = await axios.get('http://localhost:5000/api/v1/categories/getall', { withCredentials: true });
-      dispatch(getCategory(res.data.Category));
+      if (res.data.success) {
+        dispatch(getCategory(res.data.Category));
+      }
     } catch (err) {
       console.log("Error fetching categories:", err);
     }

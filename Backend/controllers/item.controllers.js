@@ -7,8 +7,7 @@ export const postItems = async (req, res) => {
     const { name, description, price, categoryId, isAvailable, type } =
       req.body;
 
-
-    if (!name || !description || !price || !req.file || !categoryId || !type) {
+    if (!name || !description || !price || !req.file || !categoryId) {
       return res.status(400).json({ message: "Something is missing" });
     }
 
@@ -48,9 +47,7 @@ export const getItemsByCategory = async (req, res) => {
 
     const items = await Item.find({
       categoryId: id,
-      isAvailable: true,
     }).populate("categoryId");
-
 
     res.status(200).json({
       success: true,

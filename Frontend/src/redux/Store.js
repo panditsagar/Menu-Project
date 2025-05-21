@@ -1,6 +1,7 @@
 // store.js
-import { configureStore } from '@reduxjs/toolkit';
-import categoriesReducer from './CategorySlice';
+import { configureStore } from "@reduxjs/toolkit";
+import categoriesReducer from "./CategorySlice";
+import itemsReducer from "./ItemSlice";
 
 import {
   persistStore,
@@ -11,24 +12,33 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist';
+} from "redux-persist";
 
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 
 // 1. Persist configuration
 const persistConfig = {
-  key: 'categories',
+  key: "categories",
+  version: 1,
+  storage,
+};
+const itemsPersistConfig = {
+  key: "items",
   version: 1,
   storage,
 };
 
 // 2. Create persisted reducer
-const persistedCategoriesReducer = persistReducer(persistConfig, categoriesReducer);
-
+const persistedCategoriesReducer = persistReducer(
+  persistConfig,
+  categoriesReducer
+);
+const persistedItemsReducer = persistReducer(itemsPersistConfig, itemsReducer);
 // 3. Configure store with persisted reducer
 export const store = configureStore({
   reducer: {
     categories: persistedCategoriesReducer,
+    items: persistedItemsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
