@@ -18,8 +18,8 @@ const App = () => {
         <Route path="/menu/categories" element={<MenuCategories />} />
         <Route path="/menu/items" element={<MenuItems />} />
         <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
-        <Route path="/admin/additem" element={<ProtectedRoute><AddItems /></ProtectedRoute>} />
-        <Route path="/admin/allitem" element={<ProtectedRoute><AllItems /></ProtectedRoute>} />
+        <Route path="/admin/additem/:categoryId" element={<ProtectedRoute><AddItems /></ProtectedRoute>} />
+        <Route path="/admin/allitem/:categoryId" element={<ProtectedRoute><AllItems /></ProtectedRoute>} />
 
       </Routes>
     </Router>

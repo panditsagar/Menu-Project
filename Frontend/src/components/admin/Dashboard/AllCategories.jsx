@@ -5,7 +5,6 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import ClearIcon from '@mui/icons-material/Clear';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategory } from '../../../redux/CategorySlice';
-import { Link } from "react-router-dom";
 
 const AllCategories = () => {
   const [name, setName] = useState("");
@@ -165,8 +164,7 @@ const AllCategories = () => {
                 </tr>
               ) : (
                 category?.map((cat, index) => (
-
-                  <tr key={cat?.id} onClick={()=> navigate("/admin/allitem")} className="hover:bg-gray-50 transition border-b last:border-0 cursor-pointer">
+                  <tr key={cat?.id} onClick={() => navigate(`/admin/allitem/${cat._id}`)} className="hover:bg-gray-50 transition border-b last:border-0 cursor-pointer">
                     <td className="py-3 px-4">{index + 1}</td>
                     <td className="py-3 px-4 font-medium text-gray-700">{cat?.name}</td>
                     <td className="py-3 px-4">

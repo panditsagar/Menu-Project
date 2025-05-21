@@ -1,18 +1,83 @@
 import { useState } from 'react';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
 export default function AddItem() {
+    const { categoryId } = useParams();
+
+    const [data, setData] = useState({
+        name: "",
+        description: "",
+        price: "",
+        type: "",
+        isAvailable: false,
+    });
+
     const [imagePreview, setImagePreview] = useState(null);
+    const [imageUrl, setImageUrl] = useState(null);
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
+            setImageUrl(file);
             setImagePreview(URL.createObjectURL(file));
         } else {
+            setImageUrl(null);
             setImagePreview(null);
         }
     };
+
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setData((prev) => ({
+            ...prev,
+            [name]: type === 'checkbox' ? checked : value
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("name", data.name);
+        formData.append("description", data.description);
+        formData.append("price", data.price);
+        formData.append("type", data.type);
+        formData.append("isAvailable", data.isAvailable);
+        formData.append("file", imageUrl); 
+        formData.append("categoryId", categoryId); 
+        try {
+
+            const res = await axios.post(
+                "http://localhost:5000/api/v1/items/post",
+                formData,
+                {
+                    headers: { "Content-Type": "multipart/form-data" },
+                    withCredentials: true,
+                }
+            );
+            if (res.data.success) {
+                alert("Item added successfully!");
+
+                setData({
+                    name: "",
+                    description: "",
+                    price: "",
+                    type: "",
+                    isAvailable: false,
+                });
+                setImagePreview(null);
+                setImageUrl(null);
+            } else {
+                alert(res.data.message || "Something went wrong");
+            }
+        } catch (error) {
+            console.error("Error uploading:", error);
+            alert("Error uploading category");
+        }
+
+    }
+
 
     return (
         <div className="min-h-screen bg-gray-100 flex justify-center px-4 py-1">
@@ -21,7 +86,7 @@ export default function AddItem() {
                 </Link>
                 <h1 className="text-xl font-semibold  text-gray-900">Add Menu Item</h1>
 
-                <form className="flex flex-col gap-6">
+                <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
                     {/* Upload Image */}
                     <div>
                         <label className="block text-gray-800 font-semibold mb-1">Upload Image</label>
@@ -55,6 +120,8 @@ export default function AddItem() {
                         <input
                             type="text"
                             name="name"
+                            value={data.name}
+                            onChange={handleChange}
                             placeholder="Enter item name"
                             className="w-full md:w-1/2 border border-gray-300 px-4 py-2 outline-none  "
                             required
@@ -66,6 +133,8 @@ export default function AddItem() {
                         <label className="block text-gray-700 font-medium mb-1">Description</label>
                         <textarea
                             name="description"
+                            value={data.description}
+                            onChange={handleChange}
                             placeholder="Enter item description"
                             className="w-full lg:w-1/2 border border-gray-300 px-4 py-2 outline-none resize-none  "
                             rows={4}
@@ -81,6 +150,8 @@ export default function AddItem() {
                             <input
                                 type="number"
                                 name="price"
+                                value={data.price}
+                                onChange={handleChange}
                                 placeholder="Enter price"
                                 className="w-full border border-gray-300 px-4 py-2 outline-none "
                                 min="0"
@@ -93,8 +164,10 @@ export default function AddItem() {
                             <label className="block text-gray-700 font-medium mb-1">Type</label>
                             <select
                                 name="type"
+                                value={data.type}
+                                onChange={handleChange}
                                 className="w-full border border-gray-300 px-3 py-2 outline-none "
-                                required
+
                             >
                                 <option value="">Select type</option>
                                 <option value="veg">Veg</option>
@@ -108,6 +181,8 @@ export default function AddItem() {
                                 type="checkbox"
                                 id="isAvailable"
                                 name="isAvailable"
+                                checked={data.isAvailable}
+                                onChange={handleChange}
                                 className="w-5 h-5 cursor-pointer"
                             />
                             <label htmlFor="isAvailable" className="text-gray-700 font-medium">
@@ -120,7 +195,7 @@ export default function AddItem() {
                     <div className='sm:mt-4'>
                         <button
                             type="submit"
-                            className="text-white  bg-black px-4 py-2  border border-gray-300 transition hover:bg-gray-800"
+                            className="text-white cursor-pointer bg-black px-4 py-2  border border-gray-300 transition hover:bg-gray-800"
                         >
                             Add Item
                         </button>

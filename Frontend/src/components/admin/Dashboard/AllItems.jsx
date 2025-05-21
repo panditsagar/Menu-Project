@@ -2,59 +2,30 @@ import React from 'react';
 import ClearIcon from '@mui/icons-material/Clear';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import EditIcon from '@mui/icons-material/Edit';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const AllItems = () => {
-    const category = [
-        {
-            name: "Margherita Pizza",
-            description: "Classic cheese pizza with fresh tomatoes and basil.",
-            price: 299,
-            type: "veg",
-            isAvailable: true,
-            image: "/images/margherita.jpg",
-        },
-        {
-            name: "Chicken Biryani",
-            description: "Aromatic basmati rice cooked with marinated chicken and spices.",
-            price: 349,
-            type: "nonveg",
-            isAvailable: true,
-            image: "/images/chicken_biryani.jpg",
-        },
-        {
-            name: "Paneer Tikka",
-            description: "Grilled paneer cubes marinated in yogurt and spices.",
-            price: 199,
-            type: "veg",
-            isAvailable: false,
-            image: "/images/paneer_tikka.jpg",
-        },
-        {
-            name: "Butter Chicken",
-            description: "Creamy and rich butter chicken served with naan.",
-            price: 399,
-            type: "nonveg",
-            isAvailable: true,
-            image: "/images/butter_chicken.jpg",
-        },
-        {
-            name: "Cold Coffee",
-            description: "Chilled and creamy coffee with ice cubes.",
-            price: 99,
-            type: "veg",
-            isAvailable: false,
-            image: "/images/cold_coffee.jpg",
-        },
-        {
-            name: "Veg Burger",
-            description: "Crispy vegetable patty with lettuce and mayo in a bun.",
-            price: 149,
-            type: "veg",
-            isAvailable: false,
-            image: "/images/veg_burger.jpg",
+    const { categoryId } = useParams();
+    const [items, setItems] = useState([]);
+
+    const fetchItems = async () => {
+        try {
+            const res = await axios.get(
+                `http://localhost:5000/api/v1/items/get/${categoryId}`, { withCredentials: true }
+            );
+            setItems(res.data.items); // Assuming your API returns items in `items` key
+        } catch (err) {
+            console.error("Error fetching items:", err);
         }
-    ];
+    }
+
+    useEffect(() => {
+        fetchItems();
+    }, [categoryId]);
+
 
     return (
         <div className="min-h-screen bg-gray-100 flex justify-center px-4 py-1">
@@ -62,7 +33,7 @@ const AllItems = () => {
                 {/* Header with Add button */}
                 <div className="flex items-center gap-3 bg-white shadow-md px-6 pb-6 md:px-6 md:pb-6">
                     <h1 className="text-xl pt-4 md:pb-1 font-semibold text-gray-900">Add Menu Item</h1>
-                    <Link to={"/admin/additem"}>
+                    <Link to={`/admin/additem/${categoryId}`}>
                         <div className="pt-3 cursor-pointer">
                             <AddCircleOutlineIcon />
                         </div>
@@ -85,31 +56,31 @@ const AllItems = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {category.length === 0 ? (
+                            {items?.length === 0 ? (
                                 <tr>
                                     <td colSpan="7" className="text-center py-4 text-gray-500">
                                         No Items available.
                                     </td>
                                 </tr>
                             ) : (
-                                category.map((cat, index) => (
+                                items?.map((item, index) => (
                                     <tr key={index} className="hover:bg-gray-50 transition border-b last:border-0 cursor-pointer">
-                                        <td className="py-3 px-4 font-medium text-gray-700 whitespace-nowrap">{cat?.name}</td>
+                                        <td className="py-3 px-4 font-medium text-gray-700 whitespace-nowrap">{item?.name}</td>
                                         <td
                                             className="py-3 px-4 font-medium text-gray-700 max-w-[160px] truncate overflow-hidden whitespace-nowrap"
-                                            title={cat.description}
+                                            title={item?.description}
                                         >
-                                            {cat.description}
+                                            {item?.description}
                                         </td>
-                                        <td className="py-3 px-4 font-medium text-gray-700">{cat.type}</td>
+                                        <td className="py-3 px-4 font-medium text-gray-700">{item?.type}</td>
                                         <td className="py-3 px-4 font-medium text-gray-700">
-                                            {cat.isAvailable ? "Available" : "Not Available"}
+                                            {item?.isAvailable ? "Available" : "Not Available"}
                                         </td>
-                                        <td className="py-3 px-4 font-medium text-gray-700 whitespace-nowrap">₹ {cat?.price}</td>
+                                        <td className="py-3 px-4 font-medium text-gray-700 whitespace-nowrap">₹ {item?.price}</td>
                                         <td className="py-3 px-4">
                                             <img
-                                                src={cat.image}
-                                                alt={cat.name}
+                                                src={item?.imageUrl}
+                                                alt={item?.name}
                                                 className="h-12 w-12 object-cover border border-gray-300"
                                             />
                                         </td>
