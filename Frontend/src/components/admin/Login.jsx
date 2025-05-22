@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import { toast } from 'react-toastify';
 
 const Login = () => {
     const [loginData, setLoginData] = useState({
@@ -26,10 +27,13 @@ const Login = () => {
 
             if (res.data.success) {
                 navigate("/admin/dashboard");
+                toast.success(res.data.message);
+
             }
+
         } catch (error) {
             console.error('Error during login:', error);
-
+            toast.error(error.response.data.message);
         }
 
         setLoginData({

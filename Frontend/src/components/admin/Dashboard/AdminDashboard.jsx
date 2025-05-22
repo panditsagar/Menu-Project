@@ -2,14 +2,18 @@ import React from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AllCategories from './AllCategories';
+import { toast } from "react-toastify";
 
 const AdminDashboard = () => {
     const navigate = useNavigate();
 
     const handleLogout = async () => {
         try {
-            await axios.post("http://localhost:5000/api/v1/admin/logout", {}, { withCredentials: true });
-            navigate("/login");
+            const res = await axios.post("http://localhost:5000/api/v1/admin/logout", {}, { withCredentials: true });
+            if (res.data.success) {
+                navigate("/login");
+                toast.success(res.data.message);
+            }
         } catch (error) {
             console.error("Logout failed:", error);
         }

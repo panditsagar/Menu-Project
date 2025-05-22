@@ -5,6 +5,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import ClearIcon from '@mui/icons-material/Clear';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategory } from '../../../redux/CategorySlice';
+import { toast } from "react-toastify";
 
 const AllCategories = () => {
   const [name, setName] = useState("");
@@ -50,11 +51,6 @@ const AllCategories = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!name || !image) {
-      alert("Please provide name and image.");
-      return;
-    }
-
     const formData = new FormData();
     formData.append("name", name);
     formData.append("file", image); // Match backend multer config
@@ -70,18 +66,15 @@ const AllCategories = () => {
       );
 
       if (res.data.success) {
-        alert("Category added successfully!");
-        // Optionally reset form
         setName("");
         setImage(null);
         setImagePreview(null);
         fetchCategories();
-      } else {
-        alert(res.data.message || "Something went wrong");
+        toast.success(res.data.message);
       }
     } catch (err) {
       console.error("Error uploading:", err);
-      alert("Error uploading category");
+      toast.error(err.response.data.message);
     }
   };
 

@@ -3,6 +3,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 export default function AddItem() {
     const { categoryId } = useParams();
     const navigate = useNavigate();
@@ -57,7 +58,7 @@ export default function AddItem() {
                 }
             );
             if (res.data.success) {
-                alert("Item added successfully!");
+                toast.success(res.data.message);
                 navigate(`/admin/allitem/${categoryId}`);
                 setData({
                     name: "",
@@ -68,12 +69,11 @@ export default function AddItem() {
                 });
                 setImagePreview(null);
                 setImageUrl(null);
-            } else {
-                alert(res.data.message || "Something went wrong");
+
             }
         } catch (error) {
             console.error("Error uploading:", error);
-            alert("Error uploading category");
+            toast.error(error.response.data.message);
         }
 
     }
@@ -109,7 +109,7 @@ export default function AddItem() {
                                 accept="image/*"
                                 onChange={handleImageChange}
                                 className="hidden"
-                                required
+
                             />
                         </label>
                     </div>
