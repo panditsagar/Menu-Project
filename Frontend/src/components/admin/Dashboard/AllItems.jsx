@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { getItem } from '../../../redux/ItemSlice.js';
+import { toast } from 'react-toastify';
 
 const AllItems = () => {
     const { categoryId } = useParams();
@@ -31,6 +32,20 @@ const AllItems = () => {
         fetchItems();
     }, [dispatch, categoryId]);
 
+    const handleDelete = async (itemId) => {
+        try {
+            const res = await axios.delete(
+                `http://localhost:5000/api/v1/items/delete/${itemId}`, { withCredentials: true }
+            );
+            if (res.data.success) {
+                fetchItems();
+                toast.success(res.data.message);
+            }
+        } catch (error) {
+            console.error("Error deleting item:", error);
+            toast.error(error.res.data.message);
+        }
+    }
 
     return (
         <div className="min-h-screen bg-gray-100 flex justify-center px-4 py-1">
@@ -47,7 +62,7 @@ const AllItems = () => {
 
                 {/* Responsive Table */}
                 <div className="bg-white p-4 md:p-6 shadow-md overflow-x-auto">
-                    <h1 className="text-xl pb-3 text-gray-400">All Pizza items</h1>
+                    <h1 className="text-xl pb-3 text-gray-400">All {item?.[0]?.categoryId?.name} items</h1>
                     <table className="w-full min-w-[600px]">
                         <thead className="bg-gray-200">
                             <tr>
@@ -93,7 +108,7 @@ const AllItems = () => {
                                             <EditIcon />
                                         </td>
                                         <td className="py-3 px-4 text-gray-500 text-center">
-                                            <ClearIcon />
+                                            <ClearIcon onClick={() => handleDelete(item._id)} />
                                         </td>
                                     </tr>
                                 ))
