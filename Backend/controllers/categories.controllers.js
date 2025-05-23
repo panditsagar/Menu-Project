@@ -1,6 +1,8 @@
 import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
 import { Categories } from "../models/categories.model.js";
+import { Item } from "../models/items.model.js";
+import { stat } from "fs";
 
 export const postCategories = async (req, res) => {
   try {
@@ -73,3 +75,27 @@ export const getAllCategories = async (req, res) => {
   }
 };
 
+export const deleteCategory = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    //  Delete all items with this category ID
+    await Item.deleteMany({ categoryId: id });
+
+    // Delete the category itself
+    const deletedCategory = await Categories.findByIdAndDelete(id);
+
+    if (!deletedCategory) {
+      return res.status(404).json({ message: "Category not found" });
+    }
+
+    res
+      .status(200)
+      .json({
+        message: "Category and related items deleted successfully",
+        success: true,
+      });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting category", error });
+  }
+};

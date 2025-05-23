@@ -48,6 +48,23 @@ const AllCategories = () => {
     fetchCategories();
   }, [dispatch]);
 
+  const handleDelete = async (categoryId) => {
+    try {
+      const res = await axios.delete(
+        `http://localhost:5000/api/v1/categories/delete/${categoryId}`,
+        { withCredentials: true }
+      );
+      if (res.data.success) {
+        navigate("/admin/dashboard")
+        fetchCategories();
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.error("Error deleting category:", error);
+      toast.error(error.response.data.message);
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -170,7 +187,7 @@ const AllCategories = () => {
                       />
                     </td>
                     <td className="py-3 px-4 text-gray-500 text-center">
-                      <ClearIcon />
+                      <ClearIcon onClick={() => handleDelete(cat._id)} />
                     </td>
                   </tr>
 
