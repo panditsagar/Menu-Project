@@ -1,16 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { getItem } from "../../redux/ItemSlice.js";
+
 
 const MenuItems = () => {
     const { id } = useParams();
     const { item } = useSelector(state => state.items);
-    console.log(item);
     const [loadingMap, setLoadingMap] = useState({});
+    const dispatch = useDispatch();
 
-    const menuItems = item?.length
-        ? item.filter((items) => items.categoryId?._id === id)
-        : [];
+    useEffect(() => {
+        const fetchItems = async () => {
+            try {
+                const res = await axios.get(
+                    `http://localhost:5000/api/v1/items/get/${id}`, { withCredentials: true }
+                );
+                if (res.data.success) {
+                    dispatch(getItem(res.data.items));
+                }
+            } catch (err) {
+                console.error("Error fetching items:", err);
+            }
+        }
+        fetchItems();
+    }, [id, dispatch]);
+
 
     const handleImageLoad = (itemId) => {
         setTimeout(() => {
@@ -23,13 +40,13 @@ const MenuItems = () => {
         <>
             <div className="p-4 pb-2">
                 <h1 className="text-black text-3xl font-semibold px-1">
-                    {menuItems[0]?.categoryId?.name || "Menu"}
+                    {item[0]?.categoryId?.name || "Menu"}
                 </h1>
                 <hr className="text-gray-300" />
             </div>
 
             <div className="p-4 w-full mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {menuItems.map((item) => (
+                {item.map((item) => (
                     <div key={item._id} className="flex bg-white overflow-hidden">
                         <div className="w-1/2 h-full relative">
                             {loadingMap[item._id] !== false && (
