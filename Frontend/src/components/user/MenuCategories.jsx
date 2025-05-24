@@ -6,8 +6,7 @@ const MenuCategories = () => {
 
     const navigate = useNavigate();
     const { category } = useSelector((state) => state.categories);
-
-
+    
     return (
         <div className="p-5 bg-[#F6F6F6]">
             {/* Header */}
@@ -19,9 +18,9 @@ const MenuCategories = () => {
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {category?.map((cat) => (
                     <div
-                        key={cat?.id}
+                        key={cat?._id}
                         className="bg-white p-2 text-center shadow cursor-pointer hover:shadow-md transition"
-                        onClick={() => navigate("/menu/items", { state: { cat } })}
+                        onClick={() => navigate(`/menu/items/${cat._id}`)}
                     >
                         <div className="w-full h-28 mx-auto overflow-hidden rounded-md">
                             <img

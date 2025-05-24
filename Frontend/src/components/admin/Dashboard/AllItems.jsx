@@ -13,6 +13,7 @@ const AllItems = () => {
     const { categoryId } = useParams();
 
     const { item } = useSelector((state) => state.items);
+   
     const dispatch = useDispatch();
 
     const fetchItems = async () => {

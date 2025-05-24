@@ -40,7 +40,7 @@ const HomePage = () => {
 
             {/* Dine-in Menu Button */}
             <div className=" w-full px-4 mt-2">
-                <button onClick={() => navigate('/menu/categories')} className="w-full bg-white text-black font-semibold py-3 rounded-full shadow-lg text-center border border-black">
+                <button onClick={() => navigate('/menu/categories')} className="w-full bg-white text-black font-semibold py-3 rounded-full shadow-lg text-center border border-black cursor-pointer">
                     VIEW DINE-IN MENU
                 </button>
             </div>
