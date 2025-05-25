@@ -4,29 +4,27 @@ Digital Menu is a responsive web application designed to provide an easy and mod
 
 ## Features
 
-Customer Menu Browsing: Customers can view categorized menu items with descriptions and prices.
-
-Admin Dashboard: Admins can add, update, and delete menu items to keep the menu up to date.
-
-Responsive Design: Fully responsive UI that works seamlessly across desktop, tablet, and mobile devices.
-
-Real-time Updates: Changes made by admins reflect immediately on the customer-facing menu.
+- **User Authentication**: Sign up and log in to access the platform.
+- **Admin Dashboard**: Admins can easily add, update, and manage courses.
+- **Course Browsing**: Users can search and browse through available tech courses.
+- **Responsive Design**: Fully responsive UI that works seamlessly across desktop, tablet, and mobile devices.
 
 ## Tech Stack
 
 ### Frontend
-React: JavaScript library for building user interfaces.
+- **React**: JavaScript library for building user interfaces.
+- **HTML, CSS, JavaScript**: Core web technologies for styling and scripting.
+- **Tailwind CSS, shadcn/ui**: For responsive and mobile-first design.
 
-HTML, CSS, JavaScript: Core web technologies for styling and scripting.
+### Backend
+- **Node.js**: JavaScript runtime for building scalable server-side applications.
+- **Express.js**: Web framework for Node.js to handle HTTP requests.
+- **MongoDB**: NoSQL database to store user and course data.
+- **JWT**: JSON Web Tokens for secure user authentication.
 
-Tailwind CSS: Utility-first CSS framework for responsive and mobile-first design.
-
-Backend
-(Specify your backend tech if any, e.g., Node.js, Firebase, or mention if frontend-only)
-
-Authentication
-(If applicable, mention admin login/authentication method here, e.g., JWT or Firebase Auth)
+### Authentication
+- **JWT Authentication**: Provides secure user login and session management.
 
 ## Live Demo
-Explore the live version of Digital Menu: [Your Demo Link Here]
 
+Explore the live version of CourseApp: [CourseApp Demo](https://courseapp-famu.onrender.com/)
