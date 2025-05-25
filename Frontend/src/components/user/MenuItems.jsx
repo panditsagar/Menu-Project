@@ -46,33 +46,34 @@ const MenuItems = () => {
             </div>
 
             <div className="p-4 w-full mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {item.map((item) => (
-                    <div key={item._id} className="flex bg-white overflow-hidden">
-                        <div className="w-1/2 h-full relative">
-                            {loadingMap[item._id] !== false && (
+                {item
+                    ?.filter(item => item.isAvailable).map((item) => (
+                        <div key={item._id} className="flex bg-white overflow-hidden">
+                            <div className="w-1/2 h-full relative">
+                                {loadingMap[item._id] !== false && (
+                                    <img
+                                        src="/loading-Image.gif"
+                                        alt="Loading..."
+                                        className="absolute w-full h-[180px] object-cover top-0 left-0 z-10"
+                                    />
+                                )}
                                 <img
-                                    src="/loading-Image.gif"
-                                    alt="Loading..."
-                                    className="absolute w-full h-[180px] object-cover top-0 left-0 z-10"
+                                    src={item?.imageUrl}
+                                    alt={item?.name}
+                                    className="w-full h-[180px] object-cover transition-opacity duration-3000 "
+                                    onLoad={() => handleImageLoad(item._id)}
                                 />
-                            )}
-                            <img
-                                src={item.imageUrl}
-                                alt={item.title}
-                                className="w-full h-[180px] object-cover transition-opacity duration-3000 "
-                                onLoad={() => handleImageLoad(item._id)}
-                            />
-                        </div>
-                        <div className="flex flex-col justify-between flex-1 bg-[#F6F6F6] px-2 py-4">
-                            <div>
-                                <h3 className="text-base font-semibold text-gray-900 leading-none">{item?.name}</h3>
-                                <p className="text-xs text-gray-600 mt-1">{item.description}</p>
-                                <div className="text-xs text-green-600 font-medium mt-1">{item?.type}</div>
                             </div>
-                            <div className="text-sm font-semibold text-gray-800 mt-2">₹{item?.price}</div>
+                            <div className="flex flex-col justify-between flex-1 bg-[#F6F6F6] px-2 py-4">
+                                <div>
+                                    <h3 className="text-base font-semibold text-gray-900 leading-none">{item?.name}</h3>
+                                    <p className="text-xs text-gray-600 mt-1">{item?.description}</p>
+                                    <div className="text-xs text-green-600 font-medium mt-1">{item?.type}</div>
+                                </div>
+                                <div className="text-sm font-semibold text-gray-800 mt-2">₹{item?.price}</div>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
             </div>
         </>
     );
