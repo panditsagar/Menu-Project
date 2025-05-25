@@ -2,7 +2,7 @@
 
 Digital Menu is a responsive web application designed to provide an easy and modern way for customers to browse restaurant menus online. Customers can view the menu on any device, while admins have the ability to add, update, and delete menu items through a secure admin interface.
 
-# Features
+## Features
 
 Customer Menu Browsing: Customers can view categorized menu items with descriptions and prices.
 
@@ -12,8 +12,9 @@ Responsive Design: Fully responsive UI that works seamlessly across desktop, tab
 
 Real-time Updates: Changes made by admins reflect immediately on the customer-facing menu.
 
-Tech Stack
-Frontend
+## Tech Stack
+
+### Frontend
 React: JavaScript library for building user interfaces.
 
 HTML, CSS, JavaScript: Core web technologies for styling and scripting.
@@ -26,6 +27,6 @@ Backend
 Authentication
 (If applicable, mention admin login/authentication method here, e.g., JWT or Firebase Auth)
 
-Live Demo
+## Live Demo
 Explore the live version of Digital Menu: [Your Demo Link Here]
 
