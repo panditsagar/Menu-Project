@@ -30,4 +30,4 @@ Digital Menu is a responsive web application designed to provide an easy and mod
 
 ## Live Demo
 
-Explore the live version of CourseApp: [CourseApp Demo]
+Explore the live version of Digital Menu: [Digital Menu Demo]
