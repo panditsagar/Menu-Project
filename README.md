@@ -15,7 +15,7 @@ Digital Menu is a responsive web application designed to provide an easy and mod
 ### Frontend
 - **React**: JavaScript library for building user interfaces.
 - **HTML, CSS, JavaScript**: Core web technologies for styling and scripting.
-- **Tailwind CSS, shadcn/ui**: For responsive and mobile-first design.
+- **Tailwind CSS**: For responsive and mobile-first design.
 
 ### Backend
 - **Node.js**: JavaScript runtime for building scalable server-side applications.
@@ -28,4 +28,4 @@ Digital Menu is a responsive web application designed to provide an easy and mod
 
 ## Live Demo
 
-Explore the live version of CourseApp: [CourseApp Demo](https://courseapp-famu.onrender.com/)
+Explore the live version of CourseApp: [CourseApp Demo]
