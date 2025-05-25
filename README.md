@@ -14,13 +14,15 @@ Digital Menu is a responsive web application designed to provide an easy and mod
 
 ### Frontend
 - **React**: JavaScript library for building user interfaces.
-- **HTML, CSS, JavaScript**: Core web technologies for styling and scripting.
+- **Redux Toolkit**: For efficient and scalable state management.
 - **Tailwind CSS**: For responsive and mobile-first design.
 
 ### Backend
 - **Node.js**: JavaScript runtime for building scalable server-side applications.
 - **Express.js**: Web framework for Node.js to handle HTTP requests.
 - **MongoDB**: NoSQL database to store user and course data.
+- **Multer**: Middleware for handling multipart/form-data for image uploads.
+- **Cloudinary**: Cloud storage for managing and serving uploaded images.
 - **JWT**: JSON Web Tokens for secure user authentication.
 
 ### Authentication
