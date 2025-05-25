@@ -1,7 +1,9 @@
 # Digital Menu System
+
 Digital Menu is a responsive web application designed to provide an easy and modern way for customers to browse restaurant menus online. Customers can view the menu on any device, while admins have the ability to add, update, and delete menu items through a secure admin interface.
 
 # Features
+
 Customer Menu Browsing: Customers can view categorized menu items with descriptions and prices.
 
 Admin Dashboard: Admins can add, update, and delete menu items to keep the menu up to date.
