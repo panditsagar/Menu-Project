@@ -4,11 +4,12 @@ Digital Menu is a responsive web application designed to provide an easy and mod
 
 ## Features
 
-- **User Authentication**: Sign up and log in to access the platform.
-- **Admin Dashboard**: Admins can easily add, update, and manage courses.
-- **Course Browsing**: Users can search and browse through available tech courses.
+- **Customer Menu Browsing**: Customers can view categorized menu items with descriptions and prices.
+- **User Authentication**: Sign up and log in to access the admin Dashboard.
+- **Admin Dashboard**: Admins can add, update, and delete menu items to keep the menu up to date.
 - **Responsive Design**: Fully responsive UI that works seamlessly across desktop, tablet, and mobile devices.
-
+- **Real-time Updates**: Changes made by admins reflect immediately on the customer-facing menu.
+  
 ## Tech Stack
 
 ### Frontend
