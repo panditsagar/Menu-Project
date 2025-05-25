@@ -85,3 +85,51 @@ export const deleteItem = async (req, res) => {
   }
 };
 
+export const updateItem = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, description, price, isAvailable, type } = req.body;
+
+    let imageUrl;
+
+    if (req.file) {
+      const fileUri = getDataUri(req.file);
+      const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+      imageUrl = cloudResponse.secure_url;
+    }
+
+    const updateData = {
+      name,
+      description,
+      price,
+      type,
+      isAvailable,
+    };
+
+    if (imageUrl) {
+      updateData.imageUrl = imageUrl;
+    }
+
+    const updatedItem = await Item.findByIdAndUpdate(id, updateData, {
+      new: true,
+    });
+
+    if (!updatedItem) {
+      return res
+        .status(404)
+        .json({ message: "Item not found", success: false });
+    }
+
+    res.status(200).json({
+      message: "Item updated successfully",
+      success: true,
+      item: updatedItem,
+    });
+  } catch (error) {
+    console.error("Error editing item:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error while editing item",
+    });
+  }
+};

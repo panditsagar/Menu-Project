@@ -11,7 +11,7 @@ export default function AddItem() {
     const navigate = useNavigate();
 
     const { item } = useSelector((state) => state.items);
-    const selectedItem = item.find((i) => i._id === id);
+    const selectedItem = item?.find((i) => i._id === id);
 
     const [data, setData] = useState({
         name: "",
@@ -62,7 +62,39 @@ export default function AddItem() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(data, imageUrl);
+
+        const formData = new FormData();
+        formData.append("name", data.name);
+        formData.append("description", data.description);
+        formData.append("price", data.price);
+        formData.append("type", data.type);
+        formData.append("isAvailable", data.isAvailable);
+        if (imageUrl) {
+            formData.append("file", imageUrl);
+        }
+
+        try {
+            const res = await axios.put(`http://localhost:5000/api/v1/items/update/${id}`, formData, {
+                headers: { "Content-Type": "multipart/form-data" },
+                withCredentials: true,
+            });
+            if (res.data.success) {
+                toast.success(res.data.message);
+                navigate(`/admin/allitem/${categoryId}`);
+                setData({
+                    name: "",
+                    description: "",
+                    price: "",
+                    type: "",
+                    isAvailable: false,
+                });
+                setImagePreview(null);
+                setImageUrl(null);
+            }
+        } catch (error) {
+            console.error("Error updating item:", error);
+            toast.error(error.response?.data?.message);
+        }
     }
 
     return (
