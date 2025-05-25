@@ -8,6 +8,7 @@ import ProtectedRoute from './components/admin/ProtectedRoute';
 import AdminDashboard from './components/admin/Dashboard/AdminDashboard';
 import AddItems from './components/admin/Dashboard/AddItems';
 import AllItems from './components/admin/Dashboard/AllItems';
+import EditItem from './components/admin/Dashboard/EditItem';
 
 const App = () => {
   return (
@@ -20,7 +21,7 @@ const App = () => {
         <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
         <Route path="/admin/additem/:categoryId" element={<ProtectedRoute><AddItems /></ProtectedRoute>} />
         <Route path="/admin/allitem/:categoryId" element={<ProtectedRoute><AllItems /></ProtectedRoute>} />
-
+        <Route path="/admin/edititem/:id/:categoryId" element={<ProtectedRoute><EditItem /></ProtectedRoute>} />  
       </Routes>
     </Router>
   )

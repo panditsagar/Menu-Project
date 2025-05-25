@@ -2,7 +2,7 @@ import React from 'react';
 import ClearIcon from '@mui/icons-material/Clear';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import EditIcon from '@mui/icons-material/Edit';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,7 +15,7 @@ const AllItems = () => {
     const { item } = useSelector((state) => state.items);
    
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     const fetchItems = async () => {
         try {
             const res = await axios.get(
@@ -106,7 +106,7 @@ const AllItems = () => {
                                             />
                                         </td>
                                         <td className="py-3 px-4 text-gray-500 text-center">
-                                            <EditIcon />
+                                            <EditIcon   onClick={() => navigate(`/admin/edititem/${item._id}/${categoryId}`)}/>
                                         </td>
                                         <td className="py-3 px-4 text-gray-500 text-center">
                                             <ClearIcon onClick={() => handleDelete(item._id)} />
