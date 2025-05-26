@@ -16,6 +16,7 @@ const AllItems = () => {
    
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    
     const fetchItems = async () => {
         try {
             const res = await axios.get(
