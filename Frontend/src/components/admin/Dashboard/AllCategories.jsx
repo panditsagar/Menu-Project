@@ -35,7 +35,7 @@ const AllCategories = () => {
   const fetchCategories = async () => {
 
     try {
-      const res = await axios.get('http://localhost:5000/api/v1/categories/getall', { withCredentials: true });
+      const res = await axios.get('https://menu-project-eta.vercel.app/api/v1/categories/getall', { withCredentials: true });
       if (res.data.success) {
         dispatch(getCategory(res.data.Category));
       }
@@ -51,7 +51,7 @@ const AllCategories = () => {
   const handleDelete = async (categoryId) => {
     try {
       const res = await axios.delete(
-        `http://localhost:5000/api/v1/categories/delete/${categoryId}`,
+        `https://menu-project-eta.vercel.app/api/v1/categories/delete/${categoryId}`,
         { withCredentials: true }
       );
       if (res.data.success) {
@@ -74,7 +74,7 @@ const AllCategories = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/v1/categories/post",
+        "https://menu-project-eta.vercel.app/api/v1/categories/post",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
