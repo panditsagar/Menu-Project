@@ -50,7 +50,7 @@ export default function AddItem() {
         try {
 
             const res = await axios.post(
-                "https://menu-project-eta.vercel.app/api/v1/items/post",
+                "http://localhost:5000/api/v1/items/post",
                 formData,
                 {
                     headers: { "Content-Type": "multipart/form-data" },
