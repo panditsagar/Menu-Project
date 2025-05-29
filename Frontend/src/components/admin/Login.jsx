@@ -18,7 +18,7 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const res = await axios.post('http://localhost:5000/api/v1/admin/login', loginData, {
+            const res = await axios.post('https://menu-project-48xu.vercel.app/api/v1/admin/login', loginData, {
                 headers: {
                     "Content-Type": "application/json",
                 },
