@@ -74,7 +74,7 @@ export default function AddItem() {
         }
 
         try {
-            const res = await axios.put(`https://menu-project-v4c5.vercel.app/api/v1/items/update/${id}`, formData, {
+            const res = await axios.put(`https://menu-project-48xu.vercel.app/api/v1/items/update/${id}`, formData, {
                 headers: { "Content-Type": "multipart/form-data" },
                 withCredentials: true,
             });
