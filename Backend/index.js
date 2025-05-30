@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "https://menu-project-8ilo.vercel.app/",
+    origin: "https://menu-project-theta.vercel.app/",
     credentials: true,
   })
 );
