@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     const verifyAuth = async () => {
       try {
-        const res = await axios.get("https://menu-project-48xu.vercel.app/api/v1/admin/check", {
+        const res = await axios.get("https://menu-project-v4c5.vercel.app/api/v1/admin/check", {
           withCredentials: true, // send cookie
         });
 

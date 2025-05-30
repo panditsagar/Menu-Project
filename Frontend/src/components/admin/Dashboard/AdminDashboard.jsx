@@ -9,7 +9,7 @@ const AdminDashboard = () => {
 
     const handleLogout = async () => {
         try {
-            const res = await axios.post("https://menu-project-48xu.vercel.app/api/v1/admin/logout", {}, { withCredentials: true });
+            const res = await axios.post("https://menu-project-v4c5.vercel.app/api/v1/admin/logout", {}, { withCredentials: true });
             if (res.data.success) {
                 navigate("/login");
                 toast.success(res.data.message);
