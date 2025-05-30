@@ -16,7 +16,7 @@ const MenuItems = () => {
         const fetchItems = async () => {
             try {
                 const res = await axios.get(
-                    `https://menu-project-v4c5.vercel.app/api/v1/items/get/${id}`, { withCredentials: true }
+                    `https://menu-project-48xu.vercel.app/api/v1/items/get/${id}`, { withCredentials: true }
                 );
                 if (res.data.success) {
                     dispatch(getItem(res.data.items));
