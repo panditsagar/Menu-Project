@@ -74,7 +74,7 @@ export default function AddItem() {
         }
 
         try {
-            const res = await axios.put(`https://menu-project-48xu.vercel.app/api/v1/items/update/${id}`, formData, {
+            const res = await axios.put(`http://localhost:5000/api/v1/items/update/${id}`, formData, {
                 headers: { "Content-Type": "multipart/form-data" },
                 withCredentials: true,
             });
@@ -215,7 +215,7 @@ export default function AddItem() {
                             type="submit"
                             className="text-white cursor-pointer bg-black px-4 py-2  border border-gray-300 transition hover:bg-gray-800"
                         >
-                            Add Item
+                            Edit Item
                         </button>
                     </div>
                 </form>

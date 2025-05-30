@@ -20,7 +20,7 @@ const AllItems = () => {
     const fetchItems = async () => {
         try {
             const res = await axios.get(
-                `https://menu-project-48xu.vercel.app/api/v1/items/get/${categoryId}`, { withCredentials: true }
+                `http://localhost:5000/api/v1/items/get/${categoryId}`, { withCredentials: true }
             );
             if (res.data.success) {
                 dispatch(getItem(res.data.items));
@@ -37,7 +37,7 @@ const AllItems = () => {
     const handleDelete = async (itemId) => {
         try {
             const res = await axios.delete(
-                `https://menu-project-48xu.vercel.app/api/v1/items/delete/${itemId}`, { withCredentials: true }
+                `http://localhost:5000/api/v1/items/delete/${itemId}`, { withCredentials: true }
             );
             if (res.data.success) {
                 fetchItems();

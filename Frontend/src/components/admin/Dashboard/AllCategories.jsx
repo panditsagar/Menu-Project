@@ -35,7 +35,7 @@ const AllCategories = () => {
   const fetchCategories = async () => {
 
     try {
-      const res = await axios.get('https://menu-project-48xu.vercel.app/api/v1/categories/getall', { withCredentials: true });
+      const res = await axios.get('http://localhost:5000/api/v1/categories/getall', { withCredentials: true });
       if (res.data.success) {
         dispatch(getCategory(res.data.Category));
       }
@@ -74,7 +74,7 @@ const AllCategories = () => {
 
     try {
       const res = await axios.post(
-        "https://menu-project-48xu.vercel.app/api/v1/categories/post",
+        "http://localhost:5000/api/v1/categories/post",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
