@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
- 
+
     if (!username || !password) {
       return res.status(400).json({
         success: false,
@@ -22,13 +22,13 @@ export const login = async (req, res) => {
     }
 
     const token = await jwt.sign({ username }, process.env.JWT_SECRET, {
-      expiresIn: "7d",
+      expiresIn: "365d",
     });
 
     return res
       .status(200)
       .cookie("token", token, {
-        maxAge: 7 * 24 * 60 * 60 * 1000,
+        maxAge: 365 * 24 * 60 * 60 * 1000, // 365 days
         httpsOnly: true,
         sameSite: "strict",
       })
