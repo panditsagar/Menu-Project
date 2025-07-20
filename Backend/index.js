@@ -27,6 +27,9 @@ app.use("/api/v1/categories", categoriesRoutes);
 app.use("/api/v1/items", itemsRoutes);
 app.use("/api/v1/admin", adminRoutes);
 
+// Check localhost:5000
+app.get("/", (req, res) => res.send("Server is running on localhost:5000"));
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
