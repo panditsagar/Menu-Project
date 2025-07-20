@@ -19,7 +19,7 @@ const AllItems = () => {
     const fetchItems = async () => {
         try {
             const res = await axios.get(
-                `http://localhost:5000/api/v1/items/get/${categoryId}`, { withCredentials: true }
+                `https://menu-project-ks8n.onrender.com/api/v1/items/get/${categoryId}`, { withCredentials: true }
             );
             if (res.data.success) {
                 dispatch(getItem(res.data.items));
@@ -36,7 +36,7 @@ const AllItems = () => {
     const handleDelete = async (itemId) => {
         try {
             const res = await axios.delete(
-                `http://localhost:5000/api/v1/items/delete/${itemId}`, { withCredentials: true }
+                `https://menu-project-ks8n.onrender.com/api/v1/items/delete/${itemId}`, { withCredentials: true }
             );
             if (res.data.success) {
                 fetchItems();
