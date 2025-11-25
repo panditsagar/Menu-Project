@@ -4,11 +4,12 @@ import axios from "axios";
 
 const ProtectedRoute = ({ children }) => {
   const [isAuth, setIsAuth] = useState(null);
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
     const verifyAuth = async () => {
       try {
-        const res = await axios.get(`${process.env.BASE_URL}admin/check`, {
+        const res = await axios.get(`${BASE_URL}admin/check`, {
           withCredentials: true, // send cookie
         });
 

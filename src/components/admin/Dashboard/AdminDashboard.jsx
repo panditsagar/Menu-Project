@@ -6,10 +6,11 @@ import { toast } from "react-toastify";
 
 const AdminDashboard = () => {
     const navigate = useNavigate();
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
     const handleLogout = async () => {
         try {
-            const res = await axios.post(`${process.env.BASE_URL}admin/logout`, {}, { withCredentials: true });
+            const res = await axios.post(`${BASE_URL}admin/logout`, {}, { withCredentials: true });
             if (res.data.success) {
                 navigate("/login");
                 toast.success(res.data.message);

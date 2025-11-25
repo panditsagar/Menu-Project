@@ -16,10 +16,12 @@ const AllItems = () => {
    
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const BASE_URL = import.meta.env.VITE_BASE_URL;
+
     const fetchItems = async () => {
         try {
             const res = await axios.get(
-                `${process.env.BASE_URL}items/get/${categoryId}`, { withCredentials: true }
+                `${BASE_URL}items/get/${categoryId}`, { withCredentials: true }
             );
             if (res.data.success) {
                 dispatch(getItem(res.data.items));
@@ -36,7 +38,7 @@ const AllItems = () => {
     const handleDelete = async (itemId) => {
         try {
             const res = await axios.delete(
-                `${process.env.BASE_URL}items/delete/${itemId}`, { withCredentials: true }
+                `${BASE_URL}items/delete/${itemId}`, { withCredentials: true }
             );
             if (res.data.success) {
                 fetchItems();

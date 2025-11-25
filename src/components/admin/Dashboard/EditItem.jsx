@@ -60,6 +60,8 @@ export default function AddItem() {
         }
     }, [selectedItem]);
 
+    const BASE_URL = import.meta.env.VITE_BASE_URL;
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -74,7 +76,7 @@ export default function AddItem() {
         }
 
         try {
-            const res = await axios.put(`${process.env.BASE_URL}items/update/${id}`, formData, {
+            const res = await axios.put(`${BASE_URL}items/update/${id}`, formData, {
                 headers: { "Content-Type": "multipart/form-data" },
                 withCredentials: true,
             });

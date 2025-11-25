@@ -11,12 +11,13 @@ const MenuItems = () => {
     const { item } = useSelector(state => state.items);
     const [loadingMap, setLoadingMap] = useState({});
     const dispatch = useDispatch();
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
     useEffect(() => {
         const fetchItems = async () => {
             try {
                 const res = await axios.get(
-                    `${process.env.BASE_URL}items/get/${id}`, { withCredentials: true }
+                    `${BASE_URL}items/get/${id}`, { withCredentials: true }
                 );
                 if (res.data.success) {
                     dispatch(getItem(res.data.items));

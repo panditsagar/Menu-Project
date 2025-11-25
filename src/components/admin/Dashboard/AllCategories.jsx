@@ -17,6 +17,7 @@ const AllCategories = () => {
   const navigate = useNavigate();
 
   const { category } = useSelector((state) => state.categories);
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 
   const handleChange = (e) => {
@@ -35,7 +36,7 @@ const AllCategories = () => {
   const fetchCategories = async () => {
 
     try {
-      const res = await axios.get(`${process.env.BASE_URL}categories/getall`, { withCredentials: true });
+      const res = await axios.get(`${BASE_URL}categories/getall`, { withCredentials: true });
       if (res.data.success) {
         dispatch(getCategory(res.data.Category));
       }
@@ -51,7 +52,7 @@ const AllCategories = () => {
   const handleDelete = async (categoryId) => {
     try {
       const res = await axios.delete(
-        `${process.env.BASE_URL}categories/delete/${categoryId}`,
+        `${process.env.VITE_BASE_URL}categories/delete/${categoryId}`,
         { withCredentials: true }
       );
       if (res.data.success) {
@@ -74,7 +75,7 @@ const AllCategories = () => {
 
     try {
       const res = await axios.post(
-        `${process.env.BASE_URL}categories/post`,
+        `${process.env.VITE_BASE_URL}categories/post`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

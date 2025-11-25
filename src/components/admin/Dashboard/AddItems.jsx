@@ -36,6 +36,8 @@ export default function AddItem() {
             [name]: type === 'checkbox' ? checked : value
         }));
     };
+    const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -50,7 +52,7 @@ export default function AddItem() {
         try {
 
             const res = await axios.post(
-                `${process.env.BASE_URL}items/post`,
+                `${BASE_URL}items/post`,
                 formData,
                 {
                     headers: { "Content-Type": "multipart/form-data" },

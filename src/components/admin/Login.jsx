@@ -13,12 +13,13 @@ const Login = () => {
     const handleChange = (e) => {
         setLoginData({ ...loginData, [e.target.name]: e.target.value })
     }
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
     const handleClick = async (e) => {
         e.preventDefault();
-
+   console.log(loginData);
         try {
-            const res = await axios.post(`${process.env.BASE_URL}admin/login`, loginData, {
+            const res = await axios.post(`${BASE_URL}admin/login`, loginData, {
                 headers: {
                     "Content-Type": "application/json",
                 },
