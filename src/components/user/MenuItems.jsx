@@ -16,7 +16,7 @@ const MenuItems = () => {
         const fetchItems = async () => {
             try {
                 const res = await axios.get(
-                    `https://menu-project-ks8n.onrender.com/api/v1/items/get/${id}`, { withCredentials: true }
+                    `${process.env.BASE_URL}items/get/${id}`, { withCredentials: true }
                 );
                 if (res.data.success) {
                     dispatch(getItem(res.data.items));

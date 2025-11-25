@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     const verifyAuth = async () => {
       try {
-        const res = await axios.get("https://menu-project-ks8n.onrender.com/api/v1/admin/check", {
+        const res = await axios.get(`${process.env.BASE_URL}admin/check`, {
           withCredentials: true, // send cookie
         });
 

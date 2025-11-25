@@ -9,7 +9,7 @@ const AdminDashboard = () => {
 
     const handleLogout = async () => {
         try {
-            const res = await axios.post("https://menu-project-ks8n.onrender.com/api/v1/admin/logout", {}, { withCredentials: true });
+            const res = await axios.post(`${process.env.BASE_URL}admin/logout`, {}, { withCredentials: true });
             if (res.data.success) {
                 navigate("/login");
                 toast.success(res.data.message);

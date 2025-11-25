@@ -35,7 +35,7 @@ const AllCategories = () => {
   const fetchCategories = async () => {
 
     try {
-      const res = await axios.get('https://menu-project-ks8n.onrender.com/api/v1/categories/getall', { withCredentials: true });
+      const res = await axios.get(`${process.env.BASE_URL}categories/getall`, { withCredentials: true });
       if (res.data.success) {
         dispatch(getCategory(res.data.Category));
       }
@@ -51,7 +51,7 @@ const AllCategories = () => {
   const handleDelete = async (categoryId) => {
     try {
       const res = await axios.delete(
-        `https://menu-project-ks8n.onrender.com/api/v1/categories/delete/${categoryId}`,
+        `${process.env.BASE_URL}categories/delete/${categoryId}`,
         { withCredentials: true }
       );
       if (res.data.success) {
@@ -74,7 +74,7 @@ const AllCategories = () => {
 
     try {
       const res = await axios.post(
-        "https://menu-project-ks8n.onrender.com/api/v1/categories/post",
+        `${process.env.BASE_URL}categories/post`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

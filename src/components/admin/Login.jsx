@@ -18,7 +18,7 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const res = await axios.post('https://menu-project-ks8n.onrender.com/api/v1/admin/login', loginData, {
+            const res = await axios.post(`${process.env.BASE_URL}admin/login`, loginData, {
                 headers: {
                     "Content-Type": "application/json",
                 },

@@ -50,7 +50,7 @@ export default function AddItem() {
         try {
 
             const res = await axios.post(
-                "https://menu-project-ks8n.onrender.com/api/v1/items/post",
+                `${process.env.BASE_URL}items/post`,
                 formData,
                 {
                     headers: { "Content-Type": "multipart/form-data" },
