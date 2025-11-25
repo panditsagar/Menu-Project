@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import ClearIcon from '@mui/icons-material/Clear';
-import { useDispatch, useSelector } from 'react-redux';
-import { getCategory } from '../../../redux/CategorySlice';
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import ClearIcon from "@mui/icons-material/Clear";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategory } from "../../../redux/CategorySlice";
 import { toast } from "react-toastify";
 
 const AllCategories = () => {
@@ -17,8 +17,7 @@ const AllCategories = () => {
   const navigate = useNavigate();
 
   const { category } = useSelector((state) => state.categories);
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -34,9 +33,10 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   // Fetch categories from the server
   const fetchCategories = async () => {
-
     try {
-      const res = await axios.get(`${BASE_URL}categories/getall`, { withCredentials: true });
+      const res = await axios.get(`${BASE_URL}categories/getall`, {
+        withCredentials: true,
+      });
       if (res.data.success) {
         dispatch(getCategory(res.data.Category));
       }
@@ -52,11 +52,11 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
   const handleDelete = async (categoryId) => {
     try {
       const res = await axios.delete(
-        `${process.env.VITE_BASE_URL}categories/delete/${categoryId}`,
+        `${BASE_URL}categories/delete/${categoryId}`,
         { withCredentials: true }
       );
       if (res.data.success) {
-        navigate("/admin/dashboard")
+        navigate("/admin/dashboard");
         fetchCategories();
         toast.success(res.data.message);
       }
@@ -64,7 +64,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
       console.error("Error deleting category:", error);
       toast.error(error.response.data.message);
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -74,14 +74,10 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
     formData.append("file", image); // Match backend multer config
 
     try {
-      const res = await axios.post(
-        `${process.env.VITE_BASE_URL}categories/post`,
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-          withCredentials: true,
-        }
-      );
+      const res = await axios.post(`${BASE_URL}categories/post`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+        withCredentials: true,
+      });
 
       if (res.data.success) {
         setName("");
@@ -96,18 +92,20 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
     }
   };
 
-
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center px-4 py-1">
+    <div className="min-h-screen bg-gray-100 flex justify-center ">
       <div className="w-full max-w-5xl space-y-1">
-
         {/* Form Section */}
         <div className="bg-white px-6 pb-6 md:px-6 md:pb-6 shadow-md">
-          <h1 className="text-xl pt-4 md:pb-1 font-semibold text-gray-900">Add Menu Categories</h1>
+          <h1 className="text-xl pt-4 md:pb-1 font-semibold text-gray-900">
+            Add Menu Categories
+          </h1>
 
           <form className="flex flex-col gap-6 " onSubmit={handleSubmit}>
             <div>
-              <label className="block text-gray-700 font-medium mb-1">Category Name</label>
+              <label className="block text-gray-700 font-medium mb-1">
+                Category Name
+              </label>
               <input
                 type="text"
                 name="name"
@@ -119,7 +117,9 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
             </div>
 
             <div>
-              <label className="block text-gray-800 font-semibold mb-1">Upload image</label>
+              <label className="block text-gray-800 font-semibold mb-1">
+                Upload image
+              </label>
               <label
                 htmlFor="image-upload"
                 className="relative flex items-center justify-center w-24 h-24 border-2 border-dashed border-gray-300  cursor-pointer bg-gray-50  transition"
@@ -164,22 +164,38 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
           <table className="w-full min-w-[400px]">
             <thead className="bg-gray-200">
               <tr>
-                <th className="text-left py-3 px-4 font-medium text-gray-600 border-b">#</th>
-                <th className="text-left py-3 px-4 font-medium text-gray-600 border-b">Name</th>
-                <th className="text-left py-3 px-4 font-medium text-gray-600 border-b">Image</th>
-                <th className=" py-3 px-4 font-medium text-gray-600 border-b">Action</th>
+                <th className="text-left py-3 px-4 font-medium text-gray-600  ">
+                  #
+                </th>
+                <th className="text-left py-3 px-4 font-medium text-gray-600  ">
+                  Name
+                </th>
+                <th className="text-left py-3 px-4 font-medium text-gray-600  ">
+                  Image
+                </th>
+                <th className=" py-3 px-4 font-medium text-gray-600  ">
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody>
               {category?.length === 0 ? (
                 <tr>
-                  <td colSpan="3" className="text-center py-4 text-gray-500">No categories available.</td>
+                  <td colSpan="3" className="text-center py-4 text-gray-500">
+                    No categories available.
+                  </td>
                 </tr>
               ) : (
                 category?.map((cat, index) => (
-                  <tr key={cat?.id} onClick={() => navigate(`/admin/allitem/${cat._id}`)} className="hover:bg-gray-50 transition border-b last:border-0 cursor-pointer">
+                  <tr
+                    key={cat?.id}
+                    onClick={() => navigate(`/admin/allitem/${cat._id}`)}
+                    className="hover:bg-gray-50 transition border-b last:border-0 cursor-pointer border-gray-300"
+                  >
                     <td className="py-3 px-4">{index + 1}</td>
-                    <td className="py-3 px-4 font-medium text-gray-700">{cat?.name}</td>
+                    <td className="py-3 px-4 font-medium text-gray-700">
+                      {cat?.name}
+                    </td>
                     <td className="py-3 px-4">
                       <img
                         src={cat?.imageUrl}
@@ -191,7 +207,6 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
                       <ClearIcon onClick={() => handleDelete(cat._id)} />
                     </td>
                   </tr>
-
                 ))
               )}
             </tbody>

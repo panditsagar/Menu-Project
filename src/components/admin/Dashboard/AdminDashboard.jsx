@@ -23,7 +23,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
     return (
         <>
             {/* Top Header */}
-            <div className="bg-gray-100 px-4 ">
+            <div className="bg-gray-100  pb-1">
                 <div className="w-full max-w-5xl mx-auto shadow-md bg-white p-4 md:p-6  flex items-center justify-between">
                     <h2 className="text-2xl md:text-2xl font-bold text-gray-800 md:text-left">
                         Admin Dashboard
